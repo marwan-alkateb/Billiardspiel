@@ -1,0 +1,45 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.1.31903.286
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tracking.API", "Tracking.API\Tracking.API.csproj", "{EC23E310-1018-4CAA-9D25-2EA8D108444E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tracking.Core", "Tracking.Core\Tracking.Core.csproj", "{6F96F8E7-3CA1-4474-91D0-5750FD23C9C2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tracking.Debug", "Tracking.Debug\Tracking.Debug.csproj", "{D63EE9A6-155D-412A-9F3F-9752E865C97E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tracking.Model", "Tracking.Model\Tracking.Model.csproj", "{152A46CD-D5ED-470D-88BA-502018C2FA33}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tracking.Server", "Tracking.Server\Tracking.Server.csproj", "{E2723BE0-60F6-4A7F-8563-075DD06D29AE}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Release|x64 = Release|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{EC23E310-1018-4CAA-9D25-2EA8D108444E}.Debug|x64.ActiveCfg = Debug|x64
+		{EC23E310-1018-4CAA-9D25-2EA8D108444E}.Debug|x64.Build.0 = Debug|x64
+		{EC23E310-1018-4CAA-9D25-2EA8D108444E}.Release|x64.ActiveCfg = Release|x64
+		{EC23E310-1018-4CAA-9D25-2EA8D108444E}.Release|x64.Build.0 = Release|x64
+		{6F96F8E7-3CA1-4474-91D0-5750FD23C9C2}.Debug|x64.ActiveCfg = Debug|x64
+		{6F96F8E7-3CA1-4474-91D0-5750FD23C9C2}.Debug|x64.Build.0 = Debug|x64
+		{6F96F8E7-3CA1-4474-91D0-5750FD23C9C2}.Release|x64.ActiveCfg = Release|x64
+		{D63EE9A6-155D-412A-9F3F-9752E865C97E}.Debug|x64.ActiveCfg = Debug|x64
+		{D63EE9A6-155D-412A-9F3F-9752E865C97E}.Debug|x64.Build.0 = Debug|x64
+		{D63EE9A6-155D-412A-9F3F-9752E865C97E}.Release|x64.ActiveCfg = Release|x64
+		{152A46CD-D5ED-470D-88BA-502018C2FA33}.Debug|x64.ActiveCfg = Debug|x64
+		{152A46CD-D5ED-470D-88BA-502018C2FA33}.Debug|x64.Build.0 = Debug|x64
+		{152A46CD-D5ED-470D-88BA-502018C2FA33}.Release|x64.ActiveCfg = Release|x64
+		{E2723BE0-60F6-4A7F-8563-075DD06D29AE}.Debug|x64.ActiveCfg = Debug|x64
+		{E2723BE0-60F6-4A7F-8563-075DD06D29AE}.Debug|x64.Build.0 = Debug|x64
+		{E2723BE0-60F6-4A7F-8563-075DD06D29AE}.Release|x64.ActiveCfg = Release|x64
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {2A808E6A-6F34-40B6-AF39-43E750264E12}
+	EndGlobalSection
+EndGlobal

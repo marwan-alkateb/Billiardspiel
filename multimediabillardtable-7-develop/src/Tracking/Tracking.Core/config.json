@@ -1,0 +1,64 @@
+{
+    "Calibration": {
+        "NumFrames": 30,
+        "DepthSampleDistances": [0.25, 0.35, 0.65, 0.75],
+        "DepthSampleThreshold": 15,
+        "MinPlayfieldArea": 75000
+    },
+    "Tracking": {
+        "HeightmapScale": 0.25,
+        "HeightmapIntensity": 0.9,
+        "HeightmapMedianSize": 11,
+        "HighPassGaussSize": 27,
+        "BilateralSize": 3,
+        "BallDepthThreshold": 12,
+        "BallCircularityThreshold": 0.25,
+        "BallAreaThreshold": 6,
+        "BallRadius": 7.5,
+        "ExtractionAngle": 0.05,
+        "ExtractionRadius": 26,
+        "ExtractionHueThreshold": 5,
+        "ExtractionSaturationThreshold": 50,
+        "ExtractionValueThreshold": 50
+    },
+    "Classifier": {
+        "ColorRanges": {
+            "Red": {
+                "HueCenter": 2,
+                "HueRange": 6,
+                "ValueCenter": 255,
+                "ValueRange": 150
+            },
+            "Orange": {
+                "HueCenter": 12,
+                "HueRange": 10,
+                "ValueCenter": 255,
+                "ValueRange": 150
+            },
+            "Maroon": {
+                "HueCenter": 12,
+                "HueRange": 20,
+                "ValueCenter": 65,
+                "ValueRange": 30
+            },
+            "Yellow": {
+                "HueCenter": 28,
+                "HueRange": 10,
+                "ValueCenter": 255,
+                "ValueRange": 150
+            },
+            "Green": {
+                "HueCenter": 75,
+                "HueRange": 20
+            },
+            "Blue": {
+                "HueCenter": 110,
+                "HueRange": 40
+            },
+            "Purple": {
+                "HueCenter": 140,
+                "HueRange": 40
+            }
+        }
+    }
+}

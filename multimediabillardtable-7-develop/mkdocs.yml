@@ -1,0 +1,13 @@
+site_name: Multimedia Billard Table
+site_url: http://localhost:8000/
+theme: 
+  name: mkdocs
+  navigation_depth: 3
+  features:
+    - navigation.instant
+    - navigation.tracking
+    - navigation.tabs
+    - navigation.tabs.sticky
+    - navigation.indexes
+    - navigation.top
+

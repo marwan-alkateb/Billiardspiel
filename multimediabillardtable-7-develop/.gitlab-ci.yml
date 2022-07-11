@@ -1,0 +1,134 @@
+stages:
+  - build_unity
+  - test_edit
+  - test_play
+
+
+# settings > CI/CD > Variables instead
+variables:
+  BUILD_NAME: Project-Simulator
+  UNITY_ACTIVATION_FILE: ./unity3d.alf
+  UNITY_VERSION: "2020.3.0f1"
+  IMAGE: unityci/editor
+  IMAGE_VERSION: "0.12"
+  UNITY_DIR: $CI_PROJECT_DIR/src/Project #$CI_PROJECT_DIR # this needs to be an absolute path. Defaults to the root of your tree.
+
+
+image: $IMAGE:$UNITY_VERSION-base-$IMAGE_VERSION
+
+.unity_before_script: &unity_before_script
+  before_script:
+    - chmod +x $UNITY_DIR/ci/before_script.sh && $UNITY_DIR/ci/before_script.sh
+
+.cache: &cache
+  cache:
+    key: "$CI_PROJECT_NAMESPACE-$CI_PROJECT_NAME-$CI_COMMIT_REF_SLUG-$TEST_PLATFORM"
+    paths:
+      - $UNITY_DIR/Library/
+
+.license: &license
+  rules:
+    - if: '$UNITY_LICENSE != null'
+      when: always
+
+.unity_defaults: &unity_defaults
+  <<:
+    - *unity_before_script
+    - *cache
+    - *license
+
+# run this job when you need to request a license
+# follow activation steps from documentation
+get-activation-file:
+  rules:
+    - if: '$UNITY_LICENSE == null'
+      when: manual
+  stage: build_unity
+  script:
+    - chmod +x $UNITY_DIR/ci/get_activation_file.sh && $UNITY_DIR/ci/get_activation_file.sh
+  artifacts:
+    paths:
+      - $UNITY_ACTIVATION_FILE
+    expire_in: 10 min # Expiring this as artifacts may contain sensitive data and should not be kept public
+
+#teste:
+#   stage: test_edit
+#   <<: *unity_defaults
+#   variables:
+#     TEST_PLATFORM: editmode
+#   script:
+#     - chmod +x $UNITY_DIR/ci/test.sh && $UNITY_DIR/ci/test.sh
+#   after_script:
+#     - mv '/builds/mmbt/ss2021/multimediabillardtable-6/src/Project/editmode-results.xml' '/builds/mmbt/ss2021/multimediabillardtable-6/editmode-results.xml'
+#   artifacts:
+#     paths:
+#       - '/builds/mmbt/ss2021/multimediabillardtable-6/editmode-results.xml'
+#     when: always
+#     expire_in: 2 weeks
+#     reports:
+#      junit: editmode-results.xml
+#   coverage: /<Linecoverage>(.*?)</Linecoverage>/
+#   rules:
+#    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
+#      when: always
+#   interruptible: true
+
+test:
+   stage: test_play
+   <<: *unity_defaults
+   variables:
+     TEST_PLATFORM: playmode
+   script:
+     - chmod +x $UNITY_DIR/ci/test.sh && $UNITY_DIR/ci/test.sh
+   after_script:
+     - mv '/builds/mmbt/ss2021/multimediabillardtable-6/src/Project/playmode-results.xml' '/builds/mmbt/ss2021/multimediabillardtable-6/playmode-results.xml'
+   artifacts:
+     paths:
+       - '/builds/mmbt/ss2021/multimediabillardtable-6/playmode-results.xml'
+     when: always
+     expire_in: 2 weeks
+#     reports:
+#      junit: /builds/mmbt/ss2021/multimediabillardtable-6/playmode-results.xml
+   coverage: /<Linecoverage>(.*?)</Linecoverage>/
+   rules:
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
+      when: always
+   interruptible: true
+
+.build: &build
+  stage: build_unity
+  <<: *unity_defaults
+  rules:
+    - if: '$CI_COMMIT_REF_NAME == "master"'
+      when: always
+  script:
+    - chmod +x $UNITY_DIR/ci/build.sh && $UNITY_DIR/ci/build.sh
+  artifacts:
+    paths:
+      - $UNITY_DIR/Builds/
+  interruptible: true
+
+
+#build-StandaloneLinux64:
+#  <<: *build
+#  variables:
+#    BUILD_TARGET: StandaloneLinux64
+
+build-StandaloneWindows64:
+  <<: *build
+  image: $IMAGE:$UNITY_VERSION-windows-mono-$IMAGE_VERSION
+  variables:
+    BUILD_TARGET: StandaloneWindows64
+
+#build-StandaloneLinux64-il2cpp:
+#  <<: *build
+#  image: $IMAGE:$UNITY_VERSION-linux-il2cpp-$IMAGE_VERSION
+#  variables:
+#    BUILD_TARGET: StandaloneLinux64
+#    SCRIPTING_BACKEND: IL2CPP
+
+#Note: build target names changed in recent versions, use this for versions < 2017.2:
+# build-StandaloneOSXUniversal:
+#   <<: *build
+#   variables:
+#     BUILD_TARGET: StandaloneOSXUniversal
